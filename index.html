@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Long Drum Tuner Pro - Expert Data</title>
+    <style>
+        :root { --primary: #d35400; --secondary: #2c3e50; --gold: #f1c40f; --bg: #fdf2e9; --blue: #2980b9; --banana: #f1c40f; }
+        body { font-family: 'Sarabun', sans-serif; background: #eee; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .app-container { background: white; width: 100%; max-width: 450px; padding: 25px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); text-align: center; }
+        
+        h2 { color: var(--secondary); margin-top: 0; margin-bottom: 5px; }
+        .expert-badge { background: var(--gold); color: #000; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 12px; margin-bottom: 15px; display: inline-block; }
+
+        .option-group { margin-bottom: 15px; text-align: left; }
+        .option-label { font-size: 14px; font-weight: bold; color: #555; margin-bottom: 8px; display: block; border-left: 4px solid var(--primary); padding-left: 8px; }
+        
+        .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+        .chip { flex: 1; min-width: 125px; padding: 10px; border: 2px solid #ddd; border-radius: 12px; cursor: pointer; background: white; font-weight: bold; font-size: 13px; transition: 0.3s; }
+        .chip.active { border-color: var(--primary); background: var(--primary); color: white; }
+        .chip.banana-mode.active { border-color: #d4ac0d; background: var(--banana); color: #000; }
+        .chip.no-mass.active { border-color: var(--blue); background: var(--blue); color: white; }
+
+        .tuner-display { background: #1a1a1a; color: #00ff00; border-radius: 25px; padding: 30px 10px; margin: 20px 0; border: 5px solid #333; box-shadow: inset 0 0 20px #000; }
+        .hz-text { font-size: 50px; font-family: monospace; text-shadow: 0 0 10px #00ff00; }
+        .needle-container { position: relative; height: 50px; width: 100%; margin-top: 10px; }
+        .needle { width: 4px; height: 60px; background: #ff0000; margin: 0 auto; transform-origin: bottom center; transition: 0.1s; border-radius: 2px; }
+
+        .advice-card { background: var(--bg); border-radius: 15px; padding: 20px; text-align: left; border-left: 6px solid var(--primary); margin-top: 15px; }
+        .advice-title { font-weight: bold; color: var(--primary); margin-bottom: 8px; font-size: 18px; }
+        .expert-ref { font-size: 13px; color: #666; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ccc; }
+
+        .btn-main { width: 100%; padding: 20px; border-radius: 50px; border: none; background: var(--secondary); color: white; font-size: 20px; font-weight: bold; cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        .btn-main:active { transform: scale(0.98); }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="expert-badge">ระบบจูนเสียงกลองยาว (งานวิจัยวัสดุถ่วงหน้า)</div>
+    <h2>🥁 จูนเนอร์กลองยาว</h2>
+
+    <div class="option-group">
+        <span class="option-label">กล้วยบด (แบบโดนัท)</span>
+        <div class="chips">
+            <button class="chip banana-mode active" onclick="setTarget(144.68, 'D3', '14.96ก.', '9.5นิ้ว', '93.50dB', 'banana', this)">กลอง 9.5 นิ้ว</button>
+            <button class="chip banana-mode" onclick="setTarget(154.5, 'D#3', '20.71ก.', '11นิ้ว', '94.05dB', 'banana', this)">กลอง 11 นิ้ว</button>
+        </div>
+    </div>
+    <div class="option-group">
+        <span class="option-label">กล้วยบด (แบบวงกลม)</span>
+        <div class="chips">
+            <button class="chip banana-mode" onclick="setTarget(142.8, 'C#3/D3', '19.2ก.', '9.5นิ้ว', '93.50dB', 'banana', this)">กลอง 9.5 นิ้ว</button>
+            <button class="chip banana-mode" onclick="setTarget(147.2, 'D3', '18.9ก.', '11นิ้ว', '94.05dB', 'banana', this)">กลอง 11 นิ้ว</button>
+        </div>
+    </div>
+
+    <hr style="border: 0.5px solid #eee; margin: 20px 0;">
+
+    <div class="option-group">
+        <span class="option-label">ข้าวเหนียว (แบบโดนัท)</span>
+        <div class="chips">
+            <button class="chip" onclick="setTarget(134.05, 'C3', '25ก.', '9.5นิ้ว', '89.65dB', 'rice', this)">กลอง 9.5 นิ้ว</button>
+            <button class="chip" onclick="setTarget(143.31, 'D3', '33ก.', '11นิ้ว', '95.26dB', 'rice', this)">กลอง 11 นิ้ว</button>
+        </div>
+    </div>
+    <div class="option-group">
+        <span class="option-label">ข้าวเหนียว (แบบวงกลม)</span>
+        <div class="chips">
+            <button class="chip" onclick="setTarget(138.69, 'C#3', '18.8ก.', '9.5นิ้ว', '92.74dB', 'rice', this)">กลอง 9.5 นิ้ว</button>
+            <button class="chip" onclick="setTarget(155.64, 'D#3', '26.8ก.', '11นิ้ว', '93.05dB', 'rice', this)">กลอง 11 นิ้ว</button>
+        </div>
+    </div>
+
+    <div class="option-group">
+        <span class="option-label">กลองเปล่า (ไม่ติดวัสดุ)</span>
+        <div class="chips">
+            <button class="chip no-mass" onclick="setTarget(190, 'F#3', '0ก.', '9.5นิ้ว', '95.86dB', 'none', this)">กลองเปล่า 9.5 นิ้ว</button>
+            <button class="chip no-mass" onclick="setTarget(265.24, 'A#3', '0ก.', '11นิ้ว', '97.11dB', 'none', this)">กลองเปล่า 11 นิ้ว</button>
+        </div>
+    </div>
+
+    <div class="tuner-display">
+        <div class="hz-text" id="current-hz">0.00</div>
+        <div style="color: #666; font-size: 14px;">เป้าหมาย: <span id="target-hz-display">144.68</span> Hz (<span id="target-note-display">D3</span>)</div>
+        <div class="needle-container">
+            <div class="needle" id="needle"></div>
+        </div>
+    </div>
+
+    <div class="advice-card" id="advice-card">
+        <div class="advice-title" id="status-label">สถานะ: ปิดไมค์</div>
+        <div id="advice-content">เลือกโหมดจูนด้านบนแล้วกดเริ่มวัดเสียง</div>
+        <div class="expert-ref" id="expert-ref">
+            อ้างอิง: ขนาด 9.5นิ้ว | มวล 14.96ก. | 93.50dB
+        </div>
+    </div>
+
+    <button id="start-btn" class="btn-main" onclick="toggleAudio()">เริ่มวัดเสียงจริง</button>
+</div>
+
+<script>
+    let audioContext = null, analyser = null, dataArray = null;
+    let isListening = false;
+    let targetHz = 144.68;
+    let currentMode = 'banana';
+
+    function setTarget(hz, note, mass, size, db, mode, el) {
+        targetHz = hz;
+        currentMode = mode;
+        document.getElementById('target-hz-display').innerText = hz;
+        document.getElementById('target-note-display').innerText = note;
+        document.getElementById('expert-ref').innerText = `อ้างอิง: ขนาด ${size} | มวล ${mass} | ระดับ ${db}`;
+        
+        document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+        
+        const card = document.getElementById('advice-card');
+        if (mode === 'none') card.style.borderLeftColor = '#2980b9';
+        else if (mode === 'banana') card.style.borderLeftColor = '#f1c40f';
+        else card.style.borderLeftColor = '#d35400';
+
+        if(!isListening) {
+            document.getElementById('status-label').innerText = "สถานะ: พร้อมวัดเสียง";
+            document.getElementById('advice-content').innerText = "ตีกลองเพื่อเปรียบเทียบกับค่ามาตรฐาน";
+        }
+    }
+
+    async function toggleAudio() {
+        if (isListening) { location.reload(); return; }
+        try {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const source = audioContext.createMediaStreamSource(stream);
+            analyser = audioContext.createAnalyser();
+            analyser.fftSize = 2048;
+            source.connect(analyser);
+            dataArray = new Float32Array(analyser.fftSize);
+            isListening = true;
+            document.getElementById('start-btn').innerText = "หยุดการวัด";
+            document.getElementById('start-btn').style.background = "#c0392b";
+            updatePitch();
+        } catch (err) {
+            alert("กรุณาอนุญาตการเข้าถึงไมโครโฟน");
+        }
+    }
+
+    function updatePitch() {
+        if (!isListening) return;
+        analyser.getFloatTimeDomainData(dataArray);
+        const pitch = autoCorrelate(dataArray, audioContext.sampleRate);
+        if (pitch !== -1 && pitch < 600) {
+            document.getElementById('current-hz').innerText = pitch.toFixed(2);
+            updateUI(pitch);
+        }
+        requestAnimationFrame(updatePitch);
+    }
+
+    function autoCorrelate(buffer, sampleRate) {
+        let SIZE = buffer.length;
+        let rms = 0;
+        for (let i = 0; i < SIZE; i++) rms += buffer[i] * buffer[i];
+        rms = Math.sqrt(rms / SIZE);
+        if (rms < 0.02) return -1;
+        
+        let c = new Float32Array(SIZE);
+        for (let i = 0; i < SIZE; i++)
+            for (let j = 0; j < SIZE - i; j++)
+                c[i] = c[i] + buffer[j] * buffer[j + i];
+
+        let d = 0; while (c[d] > c[d + 1]) d++;
+        let maxval = -1, maxpos = -1;
+        for (let i = d; i < SIZE; i++) {
+            if (c[i] > maxval) { maxval = c[i]; maxpos = i; }
+        }
+        return sampleRate / maxpos;
+    }
+
+    function updateUI(pitch) {
+        const diff = pitch - targetHz;
+        const needle = document.getElementById('needle');
+        const status = document.getElementById('status-label');
+        const advice = document.getElementById('advice-content');
+
+        let degree = diff * 2;
+        needle.style.transform = `rotate(${Math.max(-45, Math.min(45, degree))}deg)`;
+
+        if (Math.abs(diff) < 2.5) {
+            status.innerText = "สถานะ: เสียงตรงมาตรฐาน!";
+            status.style.color = "#27ae60";
+            advice.innerHTML = "ค่าความถี่ตรงตามรูปแบบการติดที่เลือกแล้ว";
+        } else if (diff > 0) {
+            status.innerText = "สถานะ: เสียงสูงไป";
+            status.style.color = "#d35400";
+            advice.innerHTML = currentMode === 'none' ? "ให้ผ่อนหน้ากลองลง" : "เพิ่มมวลวัสดุ หรือ ขยายรัศมีการติดออกไปทางขอบ";
+        } else {
+            status.innerText = "สถานะ: เสียงต่ำไป";
+            status.style.color = "#2980b9";
+            advice.innerHTML = currentMode === 'none' ? "ให้ขันหน้ากลองให้ตึง" : "ลดมวลวัสดุ หรือ บีบรัศมีการติดเข้าหาศูนย์กลาง";
+        }
+    }
+</script>
+</body>
+</html>
